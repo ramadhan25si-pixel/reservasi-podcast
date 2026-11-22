@@ -29,5 +29,6 @@ class DatabaseSeeder extends Seeder
                 //'role' => 'dosen', // Hapus tanda // jika di tabel users ada kolom role
             ]
         );
+        $this->call(RoomSeeder::class);
     }
 }
