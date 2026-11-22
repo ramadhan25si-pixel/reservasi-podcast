@@ -5,119 +5,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Reservasi Podcast</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
         body {
-            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #87CEEB; /* Biru langit */
             display: flex;
-            align-items: center;
             justify-content: center;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed 50%, #ec4899);
-            padding: 20px;
+            align-items: center;
+            height: 100vh;
         }
-
-        .card {
+        .login-box {
+            background-color: #ffffff; /* Putih */
+            padding: 30px;
+            width: 340px;
+            border: 1px solid #b0d4e3;
+            border-radius: 6px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h2 {
+            margin: 0 0 5px 0;
+            color: #222222;
+            font-size: 22px;
+        }
+        .header p {
+            margin: 0;
+            color: #555555;
+            font-size: 13px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #333333;
+            font-weight: bold;
+        }
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
             width: 100%;
-            max-width: 400px;
-            background: #fff;
-            border-radius: 16px;
-            padding: 40px 32px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, .25);
+            padding: 9px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
         }
-
-        .logo {
-            width: 56px; height: 56px;
-            margin: 0 auto 16px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 28px;
-        }
-
-        h1 { text-align: center; font-size: 24px; color: #111827; }
-        .subtitle { text-align: center; color: #6b7280; font-size: 14px; margin: 6px 0 28px; }
-
-        .field { margin-bottom: 18px; }
-        label { display: block; font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 6px; }
-
-        input[type="email"], input[type="password"] {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1.5px solid #d1d5db;
-            border-radius: 10px;
-            font-size: 15px;
-            transition: border-color .2s, box-shadow .2s;
-        }
-        input:focus {
+        .form-group input:focus {
             outline: none;
-            border-color: #6366f1;
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, .15);
+            border-color: #38bdf8;
         }
-        input.invalid { border-color: #ef4444; }
-
-        .error { color: #dc2626; font-size: 13px; margin-top: 6px; }
-
-        .row {
-            display: flex; justify-content: space-between; align-items: center;
-            font-size: 14px; color: #4b5563; margin-bottom: 22px;
+        .remember {
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #444444;
         }
-        .row label { display: flex; align-items: center; gap: 6px; font-weight: 400; margin: 0; cursor: pointer; }
-
-        button {
+        .btn-submit {
             width: 100%;
-            padding: 13px;
+            padding: 10px;
+            background-color: #38bdf8; /* Biru langit tombol */
             border: none;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            color: #fff;
-            font-size: 16px;
-            font-weight: 600;
+            border-radius: 4px;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: bold;
             cursor: pointer;
-            transition: transform .15s, box-shadow .15s;
         }
-        button:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(79, 70, 229, .4); }
-        button:active { transform: translateY(0); }
+        .btn-submit:hover {
+            background-color: #0284c7;
+        }
+        .error-box {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+        .info-akun {
+            margin-top: 20px;
+            padding-top: 12px;
+            border-top: 1px solid #eeeeee;
+            font-size: 12px;
+            color: #555555;
+        }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="logo">🎙️</div>
-        <h1>Selamat Datang</h1>
-        <p class="subtitle">Masuk untuk reservasi studio podcast</p>
 
-        <form method="POST" action="{{ route('login.process') }}">
-            @csrf
-
-            <div class="field">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email"
-                       value="{{ old('email') }}"
-                       placeholder="nama@email.com"
-                       class="{{ $errors->has('email') ? 'invalid' : '' }}"
-                       required autofocus>
-                @error('email')
-                    <div class="error">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="field">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password"
-                       placeholder="••••••••"
-                       class="{{ $errors->has('password') ? 'invalid' : '' }}"
-                       required>
-                @error('password')
-                    <div class="error">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="row">
-                <label><input type="checkbox" name="remember"> Ingat saya</label>
-            </div>
-
-            <button type="submit">Masuk</button>
-        </form>
+<div class="login-box">
+    <div class="header">
+        <h2>Selamat Datang</h2>
+        <p>Masuk untuk reservasi studio podcast</p>
     </div>
+
+    @if ($errors->any())
+        <div class="error-box">
+            {{ $errors->first() }}
+        </div>
+    @endif
+
+    <form method="POST" action="{{ url('/login') }}">
+        @csrf
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="nama@email.com" value="{{ old('email') }}" required autofocus>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Masukkan password" required>
+        </div>
+
+        <div class="remember">
+            <label>
+                <input type="checkbox" name="remember"> Ingat saya
+            </label>
+        </div>
+
+        <button type="submit" class="btn-submit">Masuk</button>
+    </form>
+
+</div>
+
 </body>
 </html>
