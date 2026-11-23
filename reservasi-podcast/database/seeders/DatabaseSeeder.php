@@ -9,26 +9,17 @@ use Illuminate\Support\Facades\Hash;
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
-    {
-        // Akun Mahasiswa
-        User::updateOrCreate(
-            ['email' => 'mahasiswa@pcr.ac.id'],
-            [
-                'name' => 'Mahasiswa PCR',
-                'password' => Hash::make('12345678'),
-                //'role' => 'mahasiswa', // Hapus tanda // jika di tabel users ada kolom role
-            ]
-        );
+{
+    User::updateOrCreate(
+        ['email' => 'mahasiswa@pcr.ac.id'],
+        ['name' => 'Farrel', 'nim' => '2557301075', 'password' => Hash::make('12345678'), 'role' => 'mahasiswa']
+    );
 
-        // Akun Dosen
-        User::updateOrCreate(
-            ['email' => 'dosen@pcr.ac.id'],
-            [
-                'name' => 'Dosen PCR',
-                'password' => Hash::make('12345678'),
-                //'role' => 'dosen', // Hapus tanda // jika di tabel users ada kolom role
-            ]
-        );
-        $this->call(RoomSeeder::class);
-    }
+    User::updateOrCreate(
+        ['email' => 'admin@pcr.ac.id'],
+        ['name' => 'Admin PCR', 'password' => Hash::make('12345678'), 'role' => 'admin']
+    );
+
+    $this->call(RuangPodcastSeeder::class);
+}
 }
