@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('detail_reservasi_fasilitas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('reservasi_id')->constrained('reservasi')->cascadeOnDelete();
+            $table->foreignId('fasilitas_id')->constrained('fasilitas')->cascadeOnDelete();
+            $table->unsignedSmallInteger('jumlah_digunakan')->default(1);
             $table->timestamps();
         });
     }

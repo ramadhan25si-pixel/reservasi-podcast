@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('fasilitas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('ruang_id')->constrained('ruang_podcast')->cascadeOnDelete();
+            $table->string('nama_fasilitas');
+            $table->unsignedSmallInteger('jumlah')->default(1);
+            $table->string('kondisi')->default('baik'); // baik | rusak | hilang
             $table->timestamps();
         });
     }

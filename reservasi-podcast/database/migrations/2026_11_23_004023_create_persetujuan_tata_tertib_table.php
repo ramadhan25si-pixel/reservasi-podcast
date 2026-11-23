@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('persetujuan_tata_tertib', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('tata_tertib_id')->constrained('tata_tertib')->cascadeOnDelete();
+            $table->foreignId('reservasi_id')->constrained('reservasi')->cascadeOnDelete();
+            $table->timestamp('tanggal_persetujuan')->useCurrent();
+            $table->boolean('status_persetujuan')->default(true);
             $table->timestamps();
         });
     }

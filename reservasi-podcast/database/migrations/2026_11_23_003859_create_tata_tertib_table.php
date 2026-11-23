@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('tata_tertib', function (Blueprint $table) {
             $table->id();
+            $table->string('judul_aturan');
+            $table->text('isi_aturan');
+            $table->boolean('status_aktif')->default(true);
             $table->timestamps();
         });
     }

@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dokumen_foto', function (Blueprint $table) {
+        Schema::create('dokumentasi_foto', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('reservasi_id')->constrained('reservasi')->cascadeOnDelete();
+            $table->string('jenis_foto'); // sebelum | sesudah
+            $table->string('file_foto');
+            $table->timestamp('waktu_unggah')->useCurrent();
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

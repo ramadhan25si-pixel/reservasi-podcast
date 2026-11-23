@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('notifikasi', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('reservasi_id')->constrained('reservasi')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->text('isi_notifikasi');
+            $table->string('jenis_notifikasi'); // konfirmasi | status | pengingat
+            $table->timestamp('waktu_kirim')->useCurrent();
+            $table->boolean('status_baca')->default(false);
             $table->timestamps();
         });
     }

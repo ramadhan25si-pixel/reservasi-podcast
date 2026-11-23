@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('ruang_podcast', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_ruang');
+            $table->string('lokasi');
+            $table->unsignedSmallInteger('kapasitas')->default(4);
+            $table->text('deskripsi')->nullable();
+            $table->string('status_ruang')->default('tersedia'); // tersedia | maintenance
             $table->timestamps();
         });
     }
