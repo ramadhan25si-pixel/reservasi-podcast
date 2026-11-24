@@ -2,9 +2,13 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GuestController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => redirect()->route('login'));
+// Halaman publik (Guest)
+Route::get('/', [GuestController::class, 'beranda'])->name('beranda');
+Route::get('/ruang', [GuestController::class, 'ruang'])->name('ruang.index');
+Route::get('/ruang/{ruang}', [GuestController::class, 'show'])->name('ruang.show');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
