@@ -8,20 +8,27 @@
 </head>
 <body>
     <header class="topbar">
-        <div class="brand">
+        <a href="{{ route('beranda') }}" class="brand">
             <span class="logo">LOGO PCR</span>
             <strong>SISTEM RESERVASI PODCAST</strong>
-        </div>
+        </a>
         <nav>
-            <a href="{{ route('dashboard') }}">Jadwal</a>
-            <a href="{{ route('reservations.index') }}">Reservasi Saya</a>
-            <details class="user-menu">
-                <summary>{{ auth()->user()->name }} ▾</summary>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit">Logout</button>
-                </form>
-            </details>
+            @auth
+                <a href="{{ route('dashboard') }}">Jadwal</a>
+                <a href="{{ route('ruang.index') }}">Ruang</a>
+                <a href="{{ route('reservations.index') }}">Reservasi Saya</a>
+                <details class="user-menu">
+                    <summary>{{ auth()->user()->name }} ▾</summary>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit">Logout</button>
+                    </form>
+                </details>
+            @else
+                <a href="{{ route('beranda') }}">Jadwal</a>
+                <a href="{{ route('ruang.index') }}">Ruang</a>
+                <a href="{{ route('login') }}" class="nav-login">Masuk</a>
+            @endauth
         </nav>
     </header>
 
