@@ -37,12 +37,11 @@ class KalenderService
             ->when($request->ruang, fn ($c) => $c->where('id', (int) $request->ruang))
             ->when($request->lokasi, fn ($c) => $c->where('lokasi', $request->lokasi));
 
-        $reservasi = Reservasi::whereBetween('tanggal_reservasi', [
-                $days->first()->toDateString(), $days->last()->toDateString(),
-            ])
-            ->whereIn('ruang_id', $ruangTampil->pluck('id'))
-            ->whereIn('status_reservasi', Reservasi::STATUS_MENGUNCI)
-            ->get();
+        $reservasi = Reservasi::whereDate('tanggal_reservasi', '>=', $days->first()->toDateString())
+    ->whereDate('tanggal_reservasi', '<=', $days->last()->toDateString())
+    ->whereIn('ruang_id', $ruangTampil->pluck('id'))
+    ->whereIn('status_reservasi', Reservasi::STATUS_MENGUNCI)
+    ->get();
 
         $cells = [];
         foreach ($days as $day) {

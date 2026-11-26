@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuestController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReservasiController;
 
 // Halaman publik (Guest)
 Route::get('/', [GuestController::class, 'beranda'])->name('beranda');
@@ -21,5 +22,6 @@ Route::middleware('auth')->group(function () {
 
     // Placeholder sementara, nanti diganti ReservasiController
     Route::get('/reservasi', fn () => 'Reservasi Saya (segera)')->name('reservations.index');
-    Route::get('/reservasi/buat', fn () => 'Form Reservasi (segera)')->name('reservations.create');
+    Route::get('/reservasi/buat', [ReservasiController::class, 'create'])->name('reservations.create');
+    Route::post('/reservasi', [ReservasiController::class, 'store'])->name('reservations.store');
 });
